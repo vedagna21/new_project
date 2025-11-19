@@ -1,0 +1,36 @@
+pipeline {
+    agent any
+
+    tools {
+        maven 'MAVEN_HOME'
+    }
+
+    stages {
+
+        stage('git repo & clean') {
+            steps {
+                bat 'rmdir /s /q webapp || exit 0'
+                bat 'git clone https://github.com/vedagna21/webapp.git'
+                bat 'mvn clean -f webapp/pom.xml'
+            }
+        }
+
+        stage('install') {
+            steps {
+                bat 'mvn install -f webapp/pom.xml'
+            }
+        }
+
+        stage('test') {
+            steps {
+                bat 'mvn test -f webapp/pom.xml'
+            }
+        }
+
+        stage('package') {
+            steps {
+                bat 'mvn package -f webapp/pom.xml'
+            }
+        }
+    }
+}
