@@ -34,3 +34,37 @@ pipeline {
         }
     }
 }
+//////// minikube ///////
+minikube start --driver=docker
+minikube status
+(installation)-minikube kubectl -- get pods -A, kubectl version --clien
+kubectl create deployment mynginx --image=nginx
+(verify)
+kubectl get deployments
+kubectl get pods
+kubectl describe pods
+(Exposed Deployment as a Service (NodePort)
+I exposed Nginx to make it accessible outside the cluster:)
+kubectl expose deployment mynginx --type=NodePort --port=80 --target-port=80
+(Scaled the Deployment)
+kubectl scale deployment mynginx --replicas=4
+(Accessed Nginx Application)
+kubectl port-forward svc/mynginx 8081:80 (open 8081)
+minikube dashboard
+kubectl delete deployment mynginx
+kubectl delete service mynginx
+minikube stop
+///nagios///
+docker pull jasonrivers/nagios:latest
+docker run --name nagiosdemo -p 8888:80 jasonrivers/nagios:latest
+in http://localhost:8888
+Logged in using:
+Username: nagiosadmin
+Password: nagios
+docker stop nagiosdemo
+docker rm nagiosdemo
+docker rmi jasonrivers/nagios:latest
+
+
+
+
