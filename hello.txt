@@ -1,3 +1,48 @@
+docker(week5)
+Pull the redis Image-docker pull redis
+Run a Redis Container-docker run --name my-redis -d redis
+Check Running Containers- docker ps
+acces redis-docker exec -it my-redis redis-cli
+SET name "veda",GET name
+docker stop my-redis
+docker rm my-redis
+-Dockerfile
+Create a folder like C:\DockerProjects\Redis
+open gitbash there
+touch Dockerfile
+code Dockerfile
+FROM redis:latest
+CMD ["redis-server"]
+docker build -t redisnew .
+docker run --name myredisnew -d redisnew
+docker stop myredisnew
+docker login
+docker ps -a
+docker commit 1cdf17f2489e vedagnapendam/redisnew
+docker images
+docker push vedagnapendam/redisnew
+docker rm 1cdf17f2489e
+docker ps -a
+ docker logout
+ docker pull vedagnapendam/redisnew
+docker run --name myredisnew -d vedagnapendam/redisnew
+winpty docker exec -it myredisnew redis-cli
+$ docker ps -a
+$ docker stop myredis
+$ docker ps -a
+$ docker stop a1bde42f0cbb
+$ docker rm a1bde42f0cbb
+$ docker images
+$ docker rmi vedagnapendam/redisnew
+$ docker logout
+
+
+
+
+
+
+
+
 pipeline {
     agent any
 
