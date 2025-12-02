@@ -1,4 +1,4 @@
-docker(week5)
+**************docker(week5)***********
 Pull the redis Image-docker pull redis
 Run a Redis Container-docker run --name my-redis -d redis
 Check Running Containers- docker ps
@@ -35,12 +35,107 @@ $ docker rm a1bde42f0cbb
 $ docker images
 $ docker rmi vedagnapendam/redisnew
 $ docker logout
+**********week-6 docker-compose*******
+create new folder add docker-compose.yaml
+services:
+  web:
+    image: nginx
+    ports: []
 
+  db:
+    image: tomee
+    ports:
+      - "8050:8080"
 
+run-
+docker-compose up -d
+ docker-compose down
+docker-compose up -d --scale web=2
+for nginx--
+version: "3.9"
 
+services:
+  web:
+    image: nginx:latest
+    ports:
+      - "8080:80"
 
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: demo
+      POSTGRES_PASSWORD: demo
+      POSTGRES_DB: demo_db
+run-
+docker compose up -d
+open localhost 5000
+now again modify add redis
+version: "3.9"
 
+services:
+  web:
+    image: nginx:latest
+    ports:
+      - "8080:80"
 
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: demo
+      POSTGRES_PASSWORD: demo
+      POSTGRES_DB: demo_db
+  redis:
+    image: redis:alpine
+run-
+docker compose up -d
+docker compose ps
+---flask app
+-Dockerfile
+FROM python:3.10-slim
+WORKDIR /app
+COPY app.py /app/
+RUN pip install flask
+CMD ["python", "app.py"]
+-app.py
+from flask import Flask
+app = Flask(__name__)
+
+@app.route("/")
+def home():
+    return "Hello from flask+docker"
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000)
+-docker-compose.yaml
+services:
+  web:
+    build: .
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+    networks:
+      - app-net
+
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: demo
+      POSTGRES_PASSWORD: demo
+      POSTGRES_DB: demo_db
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    networks:
+      - app-net
+
+volumes:
+  db-data:
+
+networks:
+  app-net:
+run-
+docker compose up --build -d
+open localhost:5000
 
 
 pipeline {
