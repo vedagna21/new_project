@@ -329,10 +329,13 @@ git remote add origin <https url>
 git push –u origin main
 go back to cmd
 git clone <copied http url>
-nano Dockerfile
+nano Dockerfile (in gitbash) (index n dockerfile inn example folder)
+commit in github 
+go to ubuntu run git pull
 write- 
-FROM ngnix:alpine
-COPY . /usr/share/ngnix/html
+FROM nginx:alpine
+COPY . /usr/share/nginx/html
+
 sudo docker build –t mywebapp .
 sudo docker run –d –p 80:80 mywebapp
 in aws click on instances i-79007...
